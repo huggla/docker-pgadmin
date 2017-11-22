@@ -14,7 +14,8 @@ ENV CONFIG_FILE $PACKAGE_DIR/config_local.py
 
 RUN touch $CONFIG_FILE && \
     echo "DEFAULT_SERVER = '0.0.0.0'" >> $CONFIG_FILE && \
-    adduser -D pgadmin
+    adduser -D pgadmin && \
+    mkdir /var/lib/pgadmin
 
 USER pgadmin
 
