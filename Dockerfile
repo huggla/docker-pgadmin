@@ -13,7 +13,7 @@ ENV PACKAGE_DIR /usr/lib/python2.7/site-packages/pgadmin4
 ENV PGADMIN4_DIR /pgadmin4
 ENV CONFIG_FILE $PGADMIN4_DIR/config_local.py
 
-RUN mkdir $PGADMIN4_DIR && \
+RUN mkdir $PGADMIN4_DIR /var/lib/pgadmin && \
     echo "DEFAULT_SERVER = '0.0.0.0'" > $CONFIG_FILE && \
     echo "LOG_FILE = '$PGADMIN4_DIR/pgadmin4.log'" >> $CONFIG_FILE && \
     echo "SQLITE_PATH = '$PGADMIN4_DIR/pgadmin4.db'" >> $CONFIG_FILE && \
@@ -21,7 +21,7 @@ RUN mkdir $PGADMIN4_DIR && \
     echo "STORAGE_DIR = '$PGADMIN4_DIR/storage'" >> $CONFIG_FILE && \
     ln -fs $CONFIG_FILE $PACKAGE_DIR/ && \
     adduser -D -h $PGADMIN4_DIR pgadmin && \
-    chown -R pgadmin:pgadmin $PGADMIN4_DIR
+    chown -R pgadmin:pgadmin $PGADMIN4_DIR /var/lib/pgadmin
 
 USER pgadmin
 
