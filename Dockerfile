@@ -7,23 +7,25 @@ RUN apk --no-cache add python postgresql-libs && \
     wget -q https://ftp.postgresql.org/pub/pgadmin/pgadmin4/v${PGADMIN4_VERSION}/pip/pgadmin4-${PGADMIN4_VERSION}-py2.py3-none-any.whl && \
     pip --no-cache-dir install pgadmin4-${PGADMIN4_VERSION}-py2.py3-none-any.whl && \
     rm pgadmin4-${PGADMIN4_VERSION}-py2.py3-none-any.whl && \
-    apk del build-dependencies
+    apk del build-dependencies    
 
 ENV PACKAGE_DIR /usr/lib/python2.7/site-packages/pgadmin4
-ENV CONFIG_FILE $PACKAGE_DIR/config_local.py
+ENV PGADMIN4_DIR /pgadmin4
+ENV CONFIG_FILE $PGADMIN4_DIR/config_local.py
 
-RUN echo "DEFAULT_SERVER = '0.0.0.0'" > $CONFIG_FILE && \
-    echo "LOG_FILE = '/pgadmin/pgadmin.log'" >> $CONFIG_FILE && \
-    echo "SQLITE_PATH = '/pgadmin/sqlite'" >> $CONFIG_FILE && \
-    echo "SESSION_DB_PATH = '/pgadmin/sessions'" >> $CONFIG_FILE && \
-    echo "STORAGE_DIR = '/pgadmin'" >> $CONFIG_FILE && \
-    adduser -D pgadmin && \
-    mkdir /pgadmin /pgadmin/sqlite /pgadmin/sessions && \
-    chown -R pgadmin:pgadmin /pgadmin
+RUN mkdir $STORAGE_DIR && \
+    echo "DEFAULT_SERVER = '0.0.0.0'" > $CONFIG_FILE && \
+    echo "LOG_FILE = '$PGADMIN4_DIR/pgadmin4.log'" >> $CONFIG_FILE && \
+    echo "SQLITE_PATH = '$PGADMIN4_DIR/pgadmin4.db'" >> $CONFIG_FILE && \
+    echo "SESSION_DB_PATH = '$PGADMIN4_DIR/sessions'" >> $CONFIG_FILE && \
+    echo "STORAGE_DIR = '$PGADMIN4_DIR/storage'" >> $CONFIG_FILE && \
+    ln -fs $CONFIG_FILE $PACKAGE_DIR/ && \
+    adduser -D --home $PGADMIN4_DIR pgadmin && \
+    chown -R pgadmin:pgadmin PGADMIN4_DIR
 
 USER pgadmin
 
-VOLUME /home/pgadmin
+VOLUME $PGADMIN4_DIR
 
 EXPOSE 5050
 
