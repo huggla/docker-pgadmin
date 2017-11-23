@@ -11,9 +11,9 @@ RUN apk --no-cache add python postgresql-libs && \
 
 ENV PACKAGE_DIR /usr/lib/python2.7/site-packages/pgadmin4
 ENV PGADMIN4_DIR /pgadmin4
-ENV CONFIG_FILE $PGADMIN4_DIR/config_local.py
+ENV CONFIG_FILE $PACKAGE_DIR/config_local.py
 
-VOLUME $PGADMIN4_DIR
+
 
 RUN mkdir /var/lib/pgadmin && \
     echo "DEFAULT_SERVER = '0.0.0.0'" > $CONFIG_FILE && \
@@ -21,14 +21,13 @@ RUN mkdir /var/lib/pgadmin && \
     echo "SQLITE_PATH = '$PGADMIN4_DIR/pgadmin4.db'" >> $CONFIG_FILE && \
     echo "SESSION_DB_PATH = '$PGADMIN4_DIR/sessions'" >> $CONFIG_FILE && \
     echo "STORAGE_DIR = '$PGADMIN4_DIR/storage'" >> $CONFIG_FILE && \
-    ln -fs $CONFIG_FILE $PACKAGE_DIR/ && \
     adduser -D -h $PGADMIN4_DIR pgadmin && \
-    chown -R pgadmin:pgadmin $PGADMIN4_DIR /var/lib/pgadmin
+    chown -R pgadmin:pgadmin $PGADMIN4_DIR $CONFIG_FILE
 
 USER pgadmin
 
-
+VOLUME $PGADMIN4_DIR
 
 EXPOSE 5050
 
-CMD ["sh", "-c", "python ${PACKAGE_DIR}/pgAdmin4.py"]
+CMD ["sh", "-c", "if [ ! -e $PGADMIN4_DIR/config_local.py ];then cp $CONFIG_FILE $PGADMIN4_DIR/;fi && ln -fs $PGADMIN4_DIR/config_local.py $CONFIG_FILE && python ${PACKAGE_DIR}/pgAdmin4.py"]
