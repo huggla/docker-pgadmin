@@ -13,7 +13,7 @@ ENV PACKAGE_DIR /usr/lib/python2.7/site-packages/pgadmin4
 ENV PGADMIN4_DIR /pgadmin4
 ENV CONFIG_FILE $PGADMIN4_DIR/config_local.py
 
-RUN mkdir $STORAGE_DIR && \
+RUN mkdir $PGADMIN4_DIR && \
     echo "DEFAULT_SERVER = '0.0.0.0'" > $CONFIG_FILE && \
     echo "LOG_FILE = '$PGADMIN4_DIR/pgadmin4.log'" >> $CONFIG_FILE && \
     echo "SQLITE_PATH = '$PGADMIN4_DIR/pgadmin4.db'" >> $CONFIG_FILE && \
