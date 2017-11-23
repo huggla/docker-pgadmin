@@ -22,7 +22,7 @@ RUN mkdir /var/lib/pgadmin && \
     echo "SESSION_DB_PATH = '$PGADMIN4_DIR/sessions'" >> $CONFIG_FILE && \
     echo "STORAGE_DIR = '$PGADMIN4_DIR/storage'" >> $CONFIG_FILE && \
     adduser -D -h $PGADMIN4_DIR pgadmin && \
-    chown -R pgadmin:pgadmin $PGADMIN4_DIR $CONFIG_FILE
+    chown -R pgadmin:pgadmin $PGADMIN4_DIR $PACKAGE_DIR
 
 USER pgadmin
 
