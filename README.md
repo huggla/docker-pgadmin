@@ -1,15 +1,10 @@
 # docker-pgadmin
-[![](https://images.microbadger.com/badges/image/nphung/pgadmin.svg)]() [![Docker Pulls](https://img.shields.io/docker/pulls/nphung/pgadmin.svg)]()
-
-pgAdmin 4 has no prebuilt packages for Debian and its derivatives, so I have created this Alpine-based Docker image (~161 MB uncompressed) to get it up and running easily on my Linux Mint 18 box.
-
-Note that pgAdmin will run in desktop mode (no multi-user and authentication).
 
 ## How to use it
 
 Run:
 ```
-docker run -d -p 5050:5050 --name pgadmin nphung/pgadmin
+docker run -d -p 5050:5050 --name pgadmin huggla/pgadmin
 ```
 
 Then you can access pgAdmin at <http://localhost:5050>.
