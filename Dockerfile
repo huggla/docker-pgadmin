@@ -12,10 +12,14 @@ RUN apk --no-cache add python postgresql-libs && \
 ENV PACKAGE_DIR /usr/lib/python2.7/site-packages/pgadmin4
 ENV CONFIG_FILE $PACKAGE_DIR/config_local.py
 
-RUN touch $CONFIG_FILE && \
-    echo "DEFAULT_SERVER = '0.0.0.0'" >> $CONFIG_FILE && \
+RUN echo "DEFAULT_SERVER = '0.0.0.0'" > $CONFIG_FILE && \
+    echo "LOG_FILE = '/pgadmin/pgadmin.log'" >> $CONFIG_FILE && \
+    echo "SQLITE_PATH = '/pgadmin/sqlite'" >> $CONFIG_FILE && \
+    echo "SESSION_DB_PATH = '/pgadmin/sessions'" >> $CONFIG_FILE && \
+    echo "STORAGE_DIR = '/pgadmin'" >> $CONFIG_FILE && \
     adduser -D pgadmin && \
-    mkdir /var/lib/pgadmin /var/log/pgadmin
+    mkdir /pgadmin /pgadmin/sqlite /pgadmin/sessions && \
+    chown -R pgadmin:pgadmin /pgadmin
 
 USER pgadmin
 
