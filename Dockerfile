@@ -20,8 +20,8 @@ RUN mkdir $STORAGE_DIR && \
     echo "SESSION_DB_PATH = '$PGADMIN4_DIR/sessions'" >> $CONFIG_FILE && \
     echo "STORAGE_DIR = '$PGADMIN4_DIR/storage'" >> $CONFIG_FILE && \
     ln -fs $CONFIG_FILE $PACKAGE_DIR/ && \
-    adduser -D --home $PGADMIN4_DIR pgadmin && \
-    chown -R pgadmin:pgadmin PGADMIN4_DIR
+    adduser -D -h $PGADMIN4_DIR pgadmin && \
+    chown -R pgadmin:pgadmin $PGADMIN4_DIR
 
 USER pgadmin
 
