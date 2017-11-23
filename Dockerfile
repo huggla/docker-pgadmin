@@ -17,6 +17,8 @@ ENV CONFIG_FILE $PACKAGE_DIR/config_local.py
 
 RUN mkdir /var/lib/pgadmin && \
     echo "DEFAULT_SERVER = '0.0.0.0'" > $CONFIG_FILE && \
+    echo "SERVER_MODE = False" >> $CONFIG_FILE && \
+    echo "ALLOW_SAVE_PASSWORD = False" >> $CONFIG_FILE && \
     echo "LOG_FILE = '$PGADMIN4_DIR/pgadmin4.log'" >> $CONFIG_FILE && \
     echo "SQLITE_PATH = '$PGADMIN4_DIR/pgadmin4.db'" >> $CONFIG_FILE && \
     echo "SESSION_DB_PATH = '$PGADMIN4_DIR/sessions'" >> $CONFIG_FILE && \
