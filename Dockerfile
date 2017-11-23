@@ -30,4 +30,4 @@ VOLUME $PGADMIN4_DIR
 
 EXPOSE 5050
 
-CMD ["sh", "-c", "if [ ! -e $PGADMIN4_DIR/config_local.py ];then cp $CONFIG_FILE $PGADMIN4_DIR/;fi && ln -fs $PGADMIN4_DIR/config_local.py $CONFIG_FILE && python ${PACKAGE_DIR}/pgAdmin4.py"]
+CMD ["sh", "-c", "if [ ! -e $PGADMIN4_DIR/config_local.py ];then cp $CONFIG_FILE $PGADMIN4_DIR/;fi && ln -f $PGADMIN4_DIR/config_local.py $CONFIG_FILE && python ${PACKAGE_DIR}/pgAdmin4.py"]
