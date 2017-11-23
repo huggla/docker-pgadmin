@@ -15,7 +15,7 @@ ENV CONFIG_FILE $PGADMIN4_DIR/config_local.py
 
 VOLUME $PGADMIN4_DIR
 
-RUN mkdir $PGADMIN4_DIR /var/lib/pgadmin && \
+RUN mkdir /var/lib/pgadmin && \
     echo "DEFAULT_SERVER = '0.0.0.0'" > $CONFIG_FILE && \
     echo "LOG_FILE = '$PGADMIN4_DIR/pgadmin4.log'" >> $CONFIG_FILE && \
     echo "SQLITE_PATH = '$PGADMIN4_DIR/pgadmin4.db'" >> $CONFIG_FILE && \
