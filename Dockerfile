@@ -23,6 +23,7 @@ RUN mkdir /var/lib/pgadmin && \
     echo "SQLITE_PATH = '$PGADMIN4_DIR/pgadmin4.db'" >> $CONFIG_FILE && \
     echo "SESSION_DB_PATH = '$PGADMIN4_DIR/sessions'" >> $CONFIG_FILE && \
     echo "STORAGE_DIR = '$PGADMIN4_DIR/storage'" >> $CONFIG_FILE && \
+    echo "UPGRADE_CHECK_ENABLED = False" >> $CONFIG_FILE && \
     adduser -D -h $PGADMIN4_DIR pgadmin && \
     chown -R pgadmin:pgadmin $PGADMIN4_DIR $PACKAGE_DIR
 
