@@ -23,6 +23,7 @@ RUN mkdir /var/lib/pgadmin \
  && echo "STORAGE_DIR = '$PGADMIN4_DIR/storage'" >> $CONFIG_FILE \
  && echo "UPGRADE_CHECK_ENABLED = False" >> $CONFIG_FILE \
  && adduser -D -h $PGADMIN4_DIR pgadmin \
+ && cp $CONFIG_FILE $PGADMIN4_DIR/config_local.py \
  && chown -R pgadmin:pgadmin $PGADMIN4_DIR $PACKAGE_DIR
 
 USER pgadmin
@@ -31,4 +32,4 @@ VOLUME $PGADMIN4_DIR
 
 EXPOSE 5050
 
-CMD ["sh", "-c", "if [ ! -e $PGADMIN4_DIR/config_local.py ];then cp $CONFIG_FILE $PGADMIN4_DIR/;fi && ln -fs $PGADMIN4_DIR/config_local.py $CONFIG_FILE && python ${PACKAGE_DIR}/pgAdmin4.py"]
+CMD ["sh", "-c", "if [ ! -L $CONFIG_FILE ];then ln -fs $PGADMIN4_DIR/config_local.py $CONFIG_FILE;fi && python ${PACKAGE_DIR}/pgAdmin4.py"]
