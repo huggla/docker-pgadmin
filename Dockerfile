@@ -34,4 +34,4 @@ VOLUME $PGADMIN4_DIR
 EXPOSE 5050
 
 ENTRYPOINT ["/bin/sh", "-c"]
-CMD ["python", "${PACKAGE_DIR}/pgAdmin4.py"]
+CMD ["python ${PACKAGE_DIR}/pgAdmin4.py"]
