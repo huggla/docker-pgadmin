@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM alpine:3.7
 
 ENV PGADMIN4_VERSION 2.0
 
@@ -28,10 +28,6 @@ RUN mkdir /var/lib/pgadmin \
  && chown -R pgadmin:pgadmin $PGADMIN4_DIR $PACKAGE_DIR
 
 USER pgadmin
-
-VOLUME $PGADMIN4_DIR
-
-EXPOSE 5050
 
 ENTRYPOINT ["/bin/sh", "-c"]
 CMD ["python ${PACKAGE_DIR}/pgAdmin4.py"]
