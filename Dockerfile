@@ -11,17 +11,16 @@ RUN apk --no-cache add python postgresql-libs \
  && apk del .build-dependencies \
  && mkdir -p /var/lib/pgadmin
 
- \
-    PACKAGE_DIR="/usr/lib/python2.7/site-packages/pgadmin4"
-ENV REV_CONFIG_FILE="$CONFIG_DIR/config_local.py \
-    REV_LINUX_USER="postgres"
+ENV REV_PACKAGE_DIR="/usr/lib/python2.7/site-packages/pgadmin4" \
+    REV_CONFIG_FILE="$CONFIG_DIR/config_local.py \
+    REV_LINUX_USER="postgres" \
+    REV_param_DEFAULT_SERVER="'0.0.0.0'" \
+    REV_param_SERVER_MODE="False" \
+    REV_param_ALLOW_SAVE_PASSWORD="False" \
+    REV_param_LOG_FILE="'/var/log/pgadmin4.log'" \
+    REV_param_SQLITE_PATH="'$CONFIG_DIR/pgadmin4.db'" \
+    REV_param_SESSION_DB_PATH="'$CONFIG_DIR/sessions'" \
+    REV_param_STORAGE_DIR="'$CONFIG_DIR/storage'" \
+    REV_param_UPGRADE_CHECK_ENABLED="False"
 
-ENV REV_LINUX_USER="postgres" \
-    REV_HOSTADDR="localhost" \
-    REV_DBNAME="postgres" \
-    REV_USER="postgres"
-
-USER pgadmin
-
-ENTRYPOINT ["/bin/sh", "-c"]
-CMD ["python ${PACKAGE_DIR}/pgAdmin4.py"]
+USER sudoer
