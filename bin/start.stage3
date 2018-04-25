@@ -24,10 +24,10 @@ then
          fi
       done
    fi
+   IFS=$IFS_bak
    PACKAGE_DIR="$(var - PACKAGE_DIR)"
    /bin/ln -fs "$CONFIG_FILE" "$PACKAGE_DIR/config_local.py" \
 fi
-IFS=$IFS_bak
 if [ -f "$BIN_DIR/start.stage4" ]
 then
    . "$BIN_DIR/start.stage4"
