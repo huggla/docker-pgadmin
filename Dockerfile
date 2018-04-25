@@ -1,5 +1,7 @@
 FROM huggla/alpine
 
+COPY ./bin ${BIN_DIR}
+
 ENV PGADMIN4_VERSION="2.0" \
     CONFIG_DIR="/etc/pgadmin" \
     REV_LINUX_USER="postgres" \
