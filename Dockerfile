@@ -1,7 +1,9 @@
 FROM huggla/alpine
 
 ENV PGADMIN4_VERSION="2.0" \
-    CONFIG_DIR="/etc/pgadmin"
+    CONFIG_DIR="/etc/pgadmin" \
+    REV_LINUX_USER="postgres" \
+    REV_PACKAGE_DIR="/usr/lib/python2.7/site-packages/pgadmin4"
 
 RUN apk --no-cache add python postgresql-libs \
  && apk --no-cache add --virtual .build-dependencies python-dev py-pip gcc musl-dev postgresql-dev wget ca-certificates \
@@ -12,9 +14,7 @@ RUN apk --no-cache add python postgresql-libs \
  && apk del .build-dependencies \
  && mkdir -p /var/lib/pgadmin
 
-ENV REV_PACKAGE_DIR="/usr/lib/python2.7/site-packages/pgadmin4" \
-    REV_CONFIG_FILE="$CONFIG_DIR/config_local.py" \
-    REV_LINUX_USER="postgres" \
+ENV REV_CONFIG_FILE="$CONFIG_DIR/config_local.py" \
     REV_param_DEFAULT_SERVER="'0.0.0.0'" \
     REV_param_SERVER_MODE="False" \
     REV_param_ALLOW_SAVE_PASSWORD="False" \
