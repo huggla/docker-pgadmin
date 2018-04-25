@@ -32,4 +32,4 @@ if [ -f "$BIN_DIR/start.stage4" ]
 then
    . "$BIN_DIR/start.stage4"
 fi
-exec /usr/bin/env -i "/usr/local/sbin/sudo" -u $LINUX_USER /usr/bin/python "$PACKAGE_DIR/pgAdmin4.py"
+exec /usr/bin/env -i "/usr/local/sbin/sudo" -u $LINUX_USER "$BIN_DIR/python" "$PACKAGE_DIR/pgAdmin4.py"
