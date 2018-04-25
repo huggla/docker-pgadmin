@@ -15,7 +15,7 @@ RUN apk --no-cache add python postgresql-libs \
  && rm pgadmin4-${PGADMIN4_VERSION}-py2.py3-none-any.whl \
  && apk del .build-dependencies \
  && mkdir -p /var/lib/pgadmin \
- && ln /usr/bin/python "$BIN_DIR/python"
+ && ln /usr/bin/python2.7 "$BIN_DIR/python"
 
 ENV REV_CONFIG_FILE="$CONFIG_DIR/config_local.py" \
     REV_param_DEFAULT_SERVER="'0.0.0.0'" \
