@@ -1,16 +1,35 @@
- \
- && mkdir -p /var/lib/pgadmin "$CONFIG_DIR" \
- 
- && { \
-       echo "DEFAULT_SERVER = '0.0.0.0'" > $CONFIG_FILE \
-    && echo "SERVER_MODE = False" >> $CONFIG_FILE \
-    && echo "ALLOW_SAVE_PASSWORD = False" >> $CONFIG_FILE \
-    && echo "LOG_FILE = '$PGADMIN4_DIR/pgadmin4.log'" >> $CONFIG_FILE \
-    && echo "SQLITE_PATH = '$PGADMIN4_DIR/pgadmin4.db'" >> $CONFIG_FILE \
-    && echo "SESSION_DB_PATH = '$PGADMIN4_DIR/sessions'" >> $CONFIG_FILE \
-    && echo "STORAGE_DIR = '$PGADMIN4_DIR/storage'" >> $CONFIG_FILE \
-    && echo "UPGRADE_CHECK_ENABLED = False" >> $CONFIG_FILE \
-    } > "$CONFIG_FILE"
- && cp $CONFIG_FILE $PGADMIN4_DIR/config_local.py \
- && ln -fs $PGADMIN4_DIR/config_local.py $CONFIG_FILE \
- && chown -R pgadmin:pgadmin $PGADMIN4_DIR $PACKAGE_DIR
+# Set in parent script:
+# ---------------------------------------------------------
+# set -e +a +m +s +i -f
+# readonly IFS_bak=$IFS
+# readonly BIN_DIR="$(/usr/bin/dirname "$0")"
+# . "$BIN_DIR/start.stage2.functions"
+# readonly LINUX_USER="$(var - LINUX_USER)"
+# readonly CONFIG_FILE="$(var - CONFIG_FILE)"
+# ---------------------------------------------------------
+
+readonly env_list
+if [ "$restart" == "false" ]
+then
+   IFS=$(echo -en "\n\b,")
+   if [ ! -s "$CONFIG_FILE" ]
+   then
+      readonly pgadmin_parameters="$(var param)"
+      for param in $pgadmin_parameters
+      do
+         param_value="$(var param $param)"
+         if [ -n "$param_value" ]
+         then
+            echo "$param = $param_value" >> "$CONFIG_FILE"
+         fi
+      done
+   fi
+   PACKAGE_DIR="$(var - PACKAGE_DIR)"
+   /bin/ln -fs "$CONFIG_FILE" "$PACKAGE_DIR/config_local.py" \
+fi
+IFS=$IFS_bak
+if [ -f "$BIN_DIR/start.stage4" ]
+then
+   . "$BIN_DIR/start.stage4"
+fi
+exec /usr/bin/env -i "/usr/local/sbin/sudo" -u $LINUX_USER /usr/bin/python "$PACKAGE_DIR/pgAdmin4.py"
