@@ -22,6 +22,7 @@ ENV REV_CONFIG_FILE="$CONFIG_DIR/config_local.py" \
     REV_param_SERVER_MODE="False" \
     REV_param_ALLOW_SAVE_PASSWORD="False" \
     REV_param_CONSOLE_LOG_LEVEL="30" \
+    REV_param_LOG_FILE="'/var/log/pgadmin'" \
     REV_param_FILE_LOG_LEVEL="0" \
     REV_param_SQLITE_PATH="'$CONFIG_DIR/pgadmin4.db'" \
     REV_param_SESSION_DB_PATH="'$CONFIG_DIR/sessions'" \
