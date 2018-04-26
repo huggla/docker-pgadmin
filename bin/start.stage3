@@ -28,6 +28,7 @@ then
       done
    fi
    IFS=$IFS_bak
+   echo "REV_PACKAGE_DIR=$PACKAGE_DIR" >> "$RESTART_ENVIRONMENT"
    /bin/ln -fs "$CONFIG_FILE" "$PACKAGE_DIR/config_local.py"
 fi
 if [ -f "$BIN_DIR/start.stage4" ]
