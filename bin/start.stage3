@@ -9,9 +9,10 @@
 # ---------------------------------------------------------
 
 readonly env_list
+PACKAGE_DIR="$(var - PACKAGE_DIR)"
 if [ "$restart" == "false" ]
 then
-   LOG_FILE="$(var param LOG_FILE)"
+   LOG_FILE="$(var param LOG_FILE | /usr/bin/tr -d "'")"
    /bin/chmod g+w "$LOG_FILE"
    IFS=$(echo -en "\n\b,")
    if [ ! -s "$CONFIG_FILE" ]
@@ -27,7 +28,6 @@ then
       done
    fi
    IFS=$IFS_bak
-   PACKAGE_DIR="$(var - PACKAGE_DIR)"
    /bin/ln -fs "$CONFIG_FILE" "$PACKAGE_DIR/config_local.py"
 fi
 if [ -f "$BIN_DIR/start.stage4" ]
