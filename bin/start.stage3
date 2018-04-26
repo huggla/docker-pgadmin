@@ -11,6 +11,8 @@
 readonly env_list
 if [ "$restart" == "false" ]
 then
+   LOG_FILE="$(var param LOG_FILE)"
+   /bin/chmod g+w "$LOG_FILE"
    IFS=$(echo -en "\n\b,")
    if [ ! -s "$CONFIG_FILE" ]
    then
