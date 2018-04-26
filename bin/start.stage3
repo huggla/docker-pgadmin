@@ -13,7 +13,10 @@ readonly PACKAGE_DIR="$(var - PACKAGE_DIR)"
 if [ "$restart" == "false" ]
 then
    LOG_FILE="$(var param LOG_FILE | /usr/bin/tr -d "'")"
-   /bin/chmod g+w "$LOG_FILE"
+   if [ -n "$LOG_FILE" ]
+   then
+      /bin/chmod g+w "$LOG_FILE"
+   fi
    IFS=$(echo -en "\n\b,")
    if [ ! -s "$CONFIG_FILE" ]
    then
