@@ -9,7 +9,7 @@
 # ---------------------------------------------------------
 
 readonly env_list
-PACKAGE_DIR="$(var - PACKAGE_DIR)"
+readonly PACKAGE_DIR="$(var - PACKAGE_DIR)"
 if [ "$restart" == "false" ]
 then
    LOG_FILE="$(var param LOG_FILE | /usr/bin/tr -d "'")"
