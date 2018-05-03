@@ -1,0 +1,26 @@
+# Set in parent script:
+# ---------------------------------------------------------
+# set -e +a +m +s +i -f
+# readonly IFS_bak=$IFS
+# . start/stage2.functions
+# ---------------------------------------------------------
+
+if [ "$firstrun" == "true" ]
+then
+   /bin/chmod g+w "$VAR_LOG_FILE"
+   IFS=$(echo -en "\n\b,")
+   if [ ! -s "$VAR_CONFIG_FILE" ]
+   then
+      pgadmin_parameters="$(set | grep VAR_param)"
+      for param in $pgadmin_parameters
+      do
+         param_value="$(var param $param)"
+         if [ -n "$param_value" ]
+         then
+            echo "$param = $param_value" >> "$VAR_CONFIG_FILE"
+         fi
+      done
+   fi
+   IFS=$IFS_bak
+   /bin/ln -fs "$VAR_CONFIG_FILE" "$VAR_PACKAGE_DIR/config_local.py"
+fi
