@@ -29,6 +29,7 @@ ENV VAR_CONFIG_FILE="$CONFIG_DIR/config_local.py" \
     VAR_param_SQLITE_PATH="'$CONFIG_DIR/pgadmin4.db'" \
     VAR_param_SESSION_DB_PATH="'$CONFIG_DIR/sessions'" \
     VAR_param_STORAGE_DIR="'$CONFIG_DIR/storage'" \
-    VAR_param_UPGRADE_CHECK_ENABLED="False"
+    VAR_param_UPGRADE_CHECK_ENABLED="False" \
+    VAR_FINAL_COMMAND="/usr/local/bin/python $VAR_PACKAGE_DIR/pgAdmin4.py"
 
 USER starter
