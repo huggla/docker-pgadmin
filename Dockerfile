@@ -1,5 +1,7 @@
 FROM huggla/alpine
 
+USER root
+
 COPY ./start /start
 
 ENV PGADMIN4_VERSION="2.0" \
