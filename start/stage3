@@ -7,7 +7,11 @@
 
 if [ "$firstrun" == "true" ]
 then
-   /bin/chmod g+w "$VAR_LOG_FILE"
+   logFile="$(echo "$VAR_param_LOG_FILE" | /usr/bin/tr -d "'")"
+   if [ -n "$logFile" ]
+   then
+      /bin/chmod g+w "$logFile"
+   fi
    if [ ! -s "$VAR_CONFIG_FILE" ]
    then
       set | grep "VAR_param" >> "$VAR_CONFIG_FILE"
