@@ -14,7 +14,7 @@ then
    fi
    if [ ! -s "$VAR_CONFIG_FILE" ]
    then
-      set | grep "VAR_param" >> "$VAR_CONFIG_FILE"
+      set | /bin/grep -E "^VAR_param" | /usr/bin/tr -d "VAR_param" >> "$VAR_CONFIG_FILE"
    fi
    /bin/ln -fs "$VAR_CONFIG_FILE" /usr/lib/python2.7/site-packages/pgadmin4/config_local.py
 fi
