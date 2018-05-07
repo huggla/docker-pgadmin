@@ -7,11 +7,7 @@
 
 if [ "$firstrun" == "true" ]
 then
-   logFile="$(removeSingleQuotes $VAR_param_LOG_FILE)"
-   if [ -n "$logFile" ]
-   then
-      /bin/chmod g+w "$logFile"
-   fi
+   /bin/chmod g+w "$(removeSingleQuotes $VAR_param_LOG_FILE)"
    if [ ! -s "$VAR_CONFIG_FILE" ]
    then
       configFromVarGroup param > "$VAR_CONFIG_FILE"
