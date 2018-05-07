@@ -14,7 +14,7 @@ then
    fi
    if [ ! -s "$VAR_CONFIG_FILE" ]
    then
-      local paramVars="$(allVARs | /bin/grep -E "^VAR_param")"
+      local paramVars="$(allVARs noquote | /bin/grep -E "^VAR_param_")"
       for var in $paramVars
       do
          removePrefixFromVar VAR_param_ $var >> "$VAR_CONFIG_FILE"
