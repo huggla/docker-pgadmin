@@ -10,7 +10,7 @@ then
    logFile="$(removeSingleQuotes $VAR_param_LOG_FILE)"
    if [ -n "$logFile" ]
    then
-      /bin/chmod g+w "$logFile"
+      /bin/chmod g+w $logFile
    fi
    if [ ! -s "$VAR_CONFIG_FILE" ]
    then
