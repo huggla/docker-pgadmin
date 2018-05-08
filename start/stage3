@@ -10,7 +10,7 @@ then
    /bin/chmod g+w "$(removeSingleQuotes $VAR_param_LOG_FILE)"
    if [ ! -s "$VAR_CONFIG_FILE" ]
    then
-      configFromVarGroup param noUnderscores > "$VAR_CONFIG_FILE"
+      configFromVarGroup param noUnderscore > "$VAR_CONFIG_FILE"
    fi
    /bin/ln -fs "$VAR_CONFIG_FILE" /usr/lib/python2.7/site-packages/pgadmin4/config_local.py
 fi
