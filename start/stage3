@@ -8,7 +8,6 @@
 if [ "$firstrun" == "true" ]
 then
    tryMakeFile "$(removeSingleQuotes "$VAR_param_SQLITE_PATH")" write
-   tryMakeFile "$(removeSingleQuotes "$VAR_param_LOG_FILE")" write
    tryMakeDir "$(removeSingleQuotes "$VAR_param_SESSION_DB_PATH")" write
    if [ ! -s "$VAR_CONFIG_FILE" ]
    then
