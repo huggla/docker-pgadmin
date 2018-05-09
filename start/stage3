@@ -7,7 +7,9 @@
 
 if [ "$firstrun" == "true" ]
 then
-   /bin/chmod g+w "$(removeSingleQuotes "$VAR_param_LOG_FILE")" "$(removeSingleQuotes "$VAR_param_SQLITE_PATH")" "$(removeSingleQuotes "$VAR_param_SESSION_DB_PATH")" "$(removeSingleQuotes "$VAR_param_STORAGE_DIR")"
+   tryMakeFile "$(removeSingleQuotes "$VAR_param_SQLITE_PATH")" write
+   tryMakeFile "$(removeSingleQuotes "$VAR_param_LOG_FILE")" write
+   tryMakeDir "$(removeSingleQuotes "$VAR_param_SESSION_DB_PATH")" write
    if [ ! -s "$VAR_CONFIG_FILE" ]
    then
       configFromVarGroup param > "$VAR_CONFIG_FILE"
