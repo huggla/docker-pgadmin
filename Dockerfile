@@ -4,7 +4,8 @@ USER root
 
 # Build-only variables
 ENV PGADMIN4_VERSION="2.0" \
-    CONFIG_DIR="/etc/pgadmin"
+    CONFIG_DIR="/etc/pgadmin" \
+    DATA_DIR="/pgdata"
 
 COPY ./start /start
 
@@ -27,9 +28,9 @@ ENV VAR_LINUX_USER="postgres" \
     VAR_param_CONSOLE_LOG_LEVEL="30" \
     VAR_param_LOG_FILE="'/var/log/pgadmin'" \
     VAR_param_FILE_LOG_LEVEL="0" \
-    VAR_param_SQLITE_PATH="'$CONFIG_DIR/pgadmin4.db'" \
-    VAR_param_SESSION_DB_PATH="'$CONFIG_DIR/sessions'" \
-    VAR_param_STORAGE_DIR="'$CONFIG_DIR/storage'" \
+    VAR_param_SQLITE_PATH="'$DATA_DIR/data/pgadmin4.db'" \
+    VAR_param_SESSION_DB_PATH="'$DATA_DIR/sessions'" \
+    VAR_param_STORAGE_DIR="'$DATA_DIR/storage'" \
     VAR_param_UPGRADE_CHECK_ENABLED="False" \
     VAR_FINAL_COMMAND="'/usr/local/bin/python /usr/lib/python2.7/site-packages/pgadmin4/pgAdmin4.py'"
 
