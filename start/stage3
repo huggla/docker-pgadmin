@@ -1,12 +1,12 @@
 # Passed from stage2:
 # ---------------------------------------------------------
 # set -e +a +m +s +i -f
+# . /start/stage2.functions
 # isFirstRun
 # VAR_*
 # ---------------------------------------------------------
 
-if [ "$isFirstRun" == "true" ]
-then
+initPgadmin(){
    local sqliteFile="$(removeSingleQuotes "$VAR_param_SQLITE_PATH")"
    local sqliteDir="$(/usr/bin/dirname "$sqliteFile")"
    if [ ! -e "$sqliteDir" ] || [ -z "$(ls -A "$sqliteDir")" ]
@@ -23,4 +23,9 @@ then
    then
       /bin/ln -fs "$VAR_CONFIG_FILE" /usr/lib/python2.7/site-packages/pgadmin4/config_local.py
    fi
+}
+
+if [ "$isFirstRun" == "true" ]
+then
+   initPgadmin
 fi
