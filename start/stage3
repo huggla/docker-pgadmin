@@ -1,11 +1,11 @@
 # Passed from stage2:
 # ---------------------------------------------------------
 # set -e +a +m +s +i -f
-# firstrun
+# isFirstRun
 # VAR_*
 # ---------------------------------------------------------
 
-if [ "$firstrun" == "true" ]
+if [ "$isFirstRun" == "true" ]
 then
    tryMakeFile "$(removeSingleQuotes "$VAR_param_SQLITE_PATH")" write
    tryMakeDir "$(removeSingleQuotes "$VAR_param_SESSION_DB_PATH")" write
